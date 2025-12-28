@@ -1,0 +1,995 @@
+    <!DOCTYPE html>
+  <html lang="tr">
+  <head>
+    <meta charset="UTF-8">
+    <title>Kalbimin Kaybolan Parçası</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html, body {
+        width: 100%;
+        height: 100%;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #0d0d1e, #483d8b);
+        color: #333;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container {
+        text-align: center;
+        padding: 2rem;
+        position: relative;
+        z-index: 2;
+      }
+
+      .petals {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .petal {
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        background: radial-gradient(circle, #0d0d1e, #0d0d1e);
+        clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        animation: fall 10s linear infinite;
+        opacity: 0.7;
+      }
+
+      @keyframes fall {
+        0% { transform: translateY(-100vh) rotate(0deg); opacity: 0.7; }
+        100% { transform: translateY(100vh) rotate(720deg); opacity: 0.2; }
+      }
+
+      .countdown {
+        position: absolute;
+        top: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        
+        padding: 0.8rem;
+       
+        text-shadow: 0 5px 15px  #4169e1;
+        text-align: center;
+        
+      }
+
+      .countdown h3 {
+        font-size: 1.6rem;
+        color: #4169e1;
+        margin-bottom: 0.4rem;
+      }
+
+      .countdown-timer {
+        display: flex;
+        gap: 0.8rem;
+        justify-content: center;
+        font-size: 1.2rem;
+        color: #0d0d1e;
+        font-weight: 500;
+      }
+
+      .countdown-timer span {
+        background: #0d0d1e;
+        padding: 0.4rem;
+        border-radius: 5px;
+        min-width: 50px;
+        text-align: center;
+      }
+
+      .glitch-text {
+        font-size: 3.5rem;
+        font-weight: 700;
+        color: #111127;
+        text-transform: uppercase;
+        text-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+        position: relative;
+        animation: glitchPulse 2s ease-in-out infinite;
+        margin-bottom: 1rem;
+        margin-top: 60px; /* Geri sayım için yer aç */
+      }
+
+      @keyframes glitchPulse {
+        0% { text-shadow: 0 0 10px #8a2be2, 2px 2px 0 #4169e1; }
+        50% { text-shadow: 0 0 15px #8a2be2, -2px -2px 0 #4169e1; }
+        100% { text-shadow: 0 0 10px #8a2be2, 2px 2px 0 #4169e1; }
+      }
+
+      .glitch-text::before,
+      .glitch-text::after {
+        content: "BARIŞ <3 RÜYA";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .glitch-text::before {
+        color: #ff69b4;
+        z-index: -1;
+        animation: glitchBefore 1s infinite;
+      }
+
+      .glitch-text::after {
+        color: #a600ff;
+        z-index: -2;
+        animation: glitchAfter 1s infinite;
+      }
+
+      @keyframes glitchBefore {
+        0% { clip-path: inset(0 0 80% 0); transform: translate(-2px, -2px); }
+        50% { clip-path: inset(20% 0 60% 0); transform: translate(2px, 2px); }
+        100% { clip-path: inset(0 0 80% 0); transform: translate(-2px, -2px); }
+      }
+
+      @keyframes glitchAfter {
+        0% { clip-path: inset(80% 0 0 0); transform: translate(2px, 2px); }
+        50% { clip-path: inset(60% 0 20% 0); transform: translate(-2px, -2px); }
+        100% { clip-path: inset(80% 0 0 0); transform: translate(2px, 2px); }
+      }
+  .title2 {
+        font-size: 2.5rem;
+        font-weight: 500;
+        color: #1a1a3a;
+        margin-bottom: 1rem;
+      }
+      .title {
+        font-size: 2.5rem;
+        font-weight: 500;
+        color: #8a2be2;
+        margin-bottom: 1rem;
+      }
+
+      .message {
+        font-size: 1.5rem;
+        color: #4169e1;
+        margin-bottom: 2rem;
+        animation: slideIn 1s ease-out;
+      }
+
+      @keyframes slideIn {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+      }
+
+      .button-container {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 1.5rem;
+      }
+
+      .music-btn, .love-btn, .video-btn, .gallery-btn, .note-btn, .quiz-btn, .video-btn2 {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 500;
+        border: none;
+        border-radius: 25px;
+        background: #111127;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .music-btn:hover, .love-btn:hover, .video-btn:hover, .gallery-btn:hover, .note-btn:hover, .quiz-btn:hover, .video-btn2:hover {
+        background: #483d8b;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px  #4169e1;
+      }
+
+      .music-icon, .love-icon, .video-icon, .gallery-icon, .note-icon, .quiz-icon, .video-icon2 {
+        font-size: 1.2rem;
+        transition: transform 0.3s ease;
+      }
+
+      .music-btn:hover .music-icon, .love-btn:hover .love-icon, 
+      .video-btn:hover .video-icon, .gallery-btn:hover .gallery-icon, 
+      .note-btn:hover .note-icon, .quiz-btn:hover .quiz-icon, .video-btn2:hover {
+        transform: rotate(360deg);
+      }
+
+      .instagram-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 1rem auto;
+        padding: 0.8rem;
+        background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .instagram-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 5px 15px #4169e1;
+      }
+
+      .instagram-icon {
+        font-size: 2rem;
+        color: white;
+      }
+
+      .music-status {
+        font-size: 0.9rem;
+        color: #b0b0ff;
+        margin-top: 1rem;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .music-status.show {
+        opacity: 1;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+      }
+      .modal2 {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal-content {
+        max-width: 80%;
+        max-height: 80vh;
+        border-radius: 10px;
+        border: 2px solid #483d8b;
+        animation: zoomIn 0.4s ease-out;
+      }
+  .modal-content2 {
+        max-width: 80%;
+        max-height: 80vh;
+        border-radius: 10px;
+        border: 2px solid #483d8b;
+        animation: zoomIn 0.4s ease-out;
+      }
+      .note-modal {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        background: #483d8b;
+        padding: 2rem;
+        border-radius: 10px;
+        border: 2px solid #b0b0ff;
+        text-align: center;
+        animation: heartbeat 1.5s ease-in-out infinite;
+      }
+
+      .note-text {
+        font-size: 1.5rem;
+        color: #b0b0ff;
+        font-weight: 500;
+      }
+
+      @keyframes heartbeat {
+        0% { transform: scale(1); }
+        20% { transform: scale(1.1); }
+        40% { transform: scale(1); }
+        60% { transform: scale(1.1); }
+        80% { transform: scale(1); }
+        100% { transform: scale(1); }
+      }
+
+      .quiz-modal {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        background: #fff0f5;
+        padding: 2rem;
+        border-radius: 10px;
+        border: 2px solid #ff69b4;
+        text-align: center;
+        width: 80%;
+        max-width: 600px;
+      }
+
+      .quiz-question {
+        font-size: 1.2rem;
+        color: #ff1493;
+        margin-bottom: 1rem;
+      }
+
+      .quiz-options {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .quiz-option {
+        padding: 0.5rem;
+        background: #0d0d1e;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      .quiz-option:hover {
+        background: #ff69b4;
+        color: white;
+      }
+
+      .quiz-result {
+        font-size: 1.5rem;
+        color: #ff69b4;
+        margin-top: 1rem;
+        display: none;
+      }
+
+      .gallery-modal {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .gallery-image {
+        max-width: 100%;
+        max-height: 60vh;
+        border-radius: 10px;
+        border: 2px solid #483d8b;
+      }
+
+      .gallery-nav {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .gallery-nav button {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        background: #141428;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      .gallery-nav button:hover {
+        background: #483d8b;
+      }
+
+      @keyframes zoomIn {
+        from { transform: scale(0.7); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+      }
+
+      .close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 2rem;
+        color: #ff69b4;
+        cursor: pointer;
+        background: white;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+
+      .close:hover {
+        background: #483d8b;
+        color: white;
+      }
+
+      .audio-player, .video-player {
+        display: none;
+      }
+
+      footer {
+        position: absolute;
+        bottom: 10px;
+        width: 100%;
+        text-align: center;
+        font-size: 0.8rem;
+        color: #999;
+      }
+
+      @media (max-width: 768px) {
+        .glitch-text { font-size: 2rem; margin-top: 50px; }
+        .title { font-size: 1.8rem; }
+        .message { font-size: 1.2rem; }
+        .music-btn, .love-btn, .video-btn, .gallery-btn, .note-btn, .quiz-btn, .video-btn2 { 
+          padding: 0.6rem 1.2rem; 
+          font-size: 0.9rem; 
+        }
+        .instagram-btn { width: 40px; height: 40px; }
+        .instagram-icon { font-size: 1.5rem; }
+        .modal-content { max-width: 90%; }
+        .modal-content2 { max-width: 90%; }
+        .countdown { padding: 0.6rem; top: 3px; }
+        .countdown h3 { font-size: 1.9rem; }
+        .countdown-timer { font-size: 1rem; }
+        .countdown-timer span { min-width: 45px; }
+        .note-text { font-size: 1.2rem; }
+        .quiz-question { font-size: 1rem; }
+        .quiz-option { font-size: 0.9rem; }
+        .quiz-result { font-size: 1.2rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="petals" id="petals"></div>
+    <div class="container">
+      <div class="countdown">
+        <h3 class="title2">♡ 03.04.2025  ♡<br> YENİ YILIN KUTLU OLSUN BALIMM </h3>
+        
+      </div>
+      <div class="glitch-text">BARIŞ <3 RÜYA</div>
+      <h1 class="title">Kalbimin Kaybolan Parçası</h1>
+      <p class="message">Yeni yılda kalbimin parçasını verdiğin için teşekkür ederim balımm 💕</p>
+      <div class="button-container">
+        <button class="music-btn" id="musicToggle" aria-label="Müzik çal/durdur">
+          <span class="music-icon">🎵</span>
+          <span id="musicText">Çal</span>
+        </button>
+        <button class="love-btn" id="loveBtn" aria-label="Aşkım'a göz at">
+          <span class="love-icon">💖</span>
+          <span>BALLL</span>
+        </button>
+        <button class="video-btn" id="videoBtn" aria-label="Video oynat">
+          <span class="video-icon">🎥</span>
+          <span>Video</span>
+        </button>
+        <button class="gallery-btn" id="galleryBtn" aria-label="Galeri aç">
+          <span class="gallery-icon">📸</span>
+          <span>Galeri</span>
+        </button>
+        <button class="note-btn" id="noteBtn" aria-label="Aşk notu aç">
+          <span class="note-icon">✉️</span>
+          <span>Not</span>
+        </button>
+              <button class="video-btn" id="videoBtn2" aria-label="Video oynat">
+          <span class="video-icon">🎥</span>
+          <span>Özel 💕</span>
+            </div>
+      <a href="biz.html" class="instagram-btn" aria-label="Instagram'a git">
+        <span class="instagram-icon">📷</span>
+      </a>
+      <div class="music-status" id="musicStatus"></div>
+      <audio id="backgroundMusic" class="audio-player" loop>
+        <source src="ama	hala.mp3" type="audio/mpeg">
+        Tarayıcınız bu formatı desteklemiyor.
+      </audio>
+      <video id="videoPlayer" class="video-player">
+        <source src="videoo.mp4" type="video/mp4">
+        Tarayıcınız bu formatı desteklemiyor.
+      </video>
+          <video id="videoPlayer2" class="video-player">
+        <source src="videoo2.mp4" type="video/mp4">
+        Tarayıcınız bu formatı desteklemiyor.
+      </video>
+    </div>
+    <footer>&copy; RÜYAM <3 </footer>
+
+    <script>
+      // Geri sayım sayacı
+      function startCountdown() {
+        const targetDate = new Date('October 15, 2025 00:00:00').getTime();
+        const countdownTimer = document.getElementById('countdownTimer');
+        const daysElement = document.getElementById('days');
+        const hoursElement = document.getElementById('hours');
+        const minutesElement = document.getElementById('minutes');
+        const secondsElement = document.getElementById('seconds');
+
+        function updateCountdown() {
+          const now = new Date().getTime();
+          const distance = targetDate - now;
+
+          if (distance <= 0) {
+            countdownTimer.innerHTML = '<span>Buluşma zamanı geldi! 💕</span>';
+            return;
+          }
+
+          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          daysElement.textContent = days.toString().padStart(2, '0');
+          hoursElement.textContent = hours.toString().padStart(2, '0');
+          minutesElement.textContent = minutes.toString().padStart(2, '0');
+          secondsElement.textContent = seconds.toString().padStart(2, '0');
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+      }
+
+      // Çiçek yaprakları animasyonu
+      const petals = document.getElementById('petals');
+      for (let i = 0; i < 20; i++) {
+        const petal = document.createElement('div');
+        petal.classList.add('petal');
+        petal.style.left = Math.random() * 100 + 'vw';
+        petal.style.animationDuration = 8 + Math.random() * 4 + 's';
+        petal.style.animationDelay = Math.random() * 5 + 's';
+        petals.appendChild(petal);
+      }
+
+      // Müzik kontrolü
+      const musicPlayer = document.getElementById('backgroundMusic');
+      const musicToggle = document.getElementById('musicToggle');
+      const musicText = document.getElementById('musicText');
+      const musicStatus = document.getElementById('musicStatus');
+      let isPlaying = false;
+
+      musicToggle.addEventListener('click', () => {
+        if (isPlaying) {
+          musicPlayer.pause();
+          musicText.textContent = 'Çal';
+          musicStatus.textContent = 'Müzik durdu... 🌙';
+          musicStatus.classList.add('show');
+          setTimeout(() => musicStatus.classList.remove('show'), 2000);
+          isPlaying = false;
+        } else {
+          musicPlayer.play().then(() => {
+            musicText.textContent = 'Durdur';
+            musicStatus.textContent = 'Müzik çalıyor... 💖';
+            musicStatus.classList.add('show');
+            isPlaying = true;
+          }).catch(error => {
+            console.error('Müzik çalma hatası:', error);
+            musicStatus.textContent = 'Müzik çalamadı 😢';
+            musicStatus.classList.add('show');
+            setTimeout(() => musicStatus.classList.remove('show'), 2000);
+          });
+        }
+      });
+
+      // Otomatik sessiz mod
+      document.addEventListener('DOMContentLoaded', () => {
+        musicPlayer.volume = 0.3;
+        startCountdown();
+      });
+
+      // Modal kontrolü (Resim için)
+      const loveBtn = document.getElementById('loveBtn');
+      function createImageModal() {
+        const modal = document.createElement('div');
+        modal.className = 'modal';
+        modal.id = 'imageModal';
+        modal.innerHTML = `
+          <span class="close" id="closeImageModal">&times;</span>
+          <img class="modal-content" id="modalImage" src="pikachu.jpeg" alt="Aşkım 💕">
+        `;
+        document.body.appendChild(modal);
+
+        const closeModal = document.getElementById('closeImageModal');
+        closeModal.addEventListener('click', () => {
+          modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+          if (event.target === modal) {
+            modal.style.display = 'none';
+          }
+        });
+
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') {
+            modal.style.display = 'none';
+          }
+        });
+
+        const modalImage = document.getElementById('modalImage');
+        modalImage.addEventListener('error', () => {
+          modalImage.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMjIyIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJQb3BwaW5zIiBmb250LXNpemU9IjE0IiBmaWxsPSIjZmY2OWI0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+UmVzaW0gWXVrbGVuZW1lZGkgOjwvdGV4dD48L3N2Zz4=';
+        });
+
+        return modal;
+      }
+
+      loveBtn.addEventListener('click', () => {
+        const modal = document.getElementById('imageModal') || createImageModal();
+        modal.style.display = 'flex';
+      });
+
+      // Video modal kontrolü
+      const videoBtn = document.getElementById('videoBtn');
+      const videoPlayer = document.getElementById('videoPlayer');
+      function createVideoModal() {
+        const modal = document.createElement('div');
+        modal.className = 'modal';
+        modal.id = 'videoModal';
+        modal.innerHTML = `
+          <span class="close" id="closeVideoModal">&times;</span>
+          <video class="modal-content" id="modalVideo" controls>
+            <source src="videoo.mp4" type="video/mp4">
+            Tarayıcınız bu formatı desteklemiyor.
+          </video>
+        `;
+        document.body.appendChild(modal);
+
+        const closeModal = document.getElementById('closeVideoModal');
+        const modalVideo = document.getElementById('modalVideo');
+        
+        closeModal.addEventListener('click', () => {
+          modalVideo.pause();
+          modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+          if (event.target === modal) {
+            modalVideo.pause();
+            modal.style.display = 'none';
+          }
+        });
+
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') {
+            modalVideo.pause();
+            modal.style.display = 'none';
+          }
+        });
+
+        return modal;
+      }
+
+      videoBtn.addEventListener('click', () => {
+        const modal = document.getElementById('videoModal') || createVideoModal();
+        const modalVideo = document.getElementById('modalVideo');
+        modal.style.display = 'flex';
+        modalVideo.play().catch(error => {
+          console.error('Video oynatma hatası:', error);
+        });
+      });
+  // surpriz
+  const videoBtn2 = document.getElementById('videoBtn2');
+
+  function createVideoModal2() {
+    const videos = [
+      "videoo2.mp4",
+      "videoo3.mp4",
+
+      // istediğin kadar video ekle
+    ];
+
+    let currentIndex = 0;
+
+    const modal2 = document.createElement('div');
+    modal2.className = 'modal';
+    modal2.id = 'videoModal2';
+    modal2.innerHTML = `
+      <span class="close" id="closeVideoModal2">&times;</span>
+      <div class="gallery-modal">
+        <video class="gallery-image" id="modalVideo2" controls autoplay>
+          <source src="${videos[currentIndex]}" type="video/mp4">
+          Tarayıcınız bu formatı desteklemiyor.
+        </video>
+        <div class="gallery-nav">
+          <button id="prevVideo">Önceki</button>
+          <button id="nextVideo">Sonraki</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal2);
+
+    const closeModal2 = document.getElementById('closeVideoModal2');
+    const modalVideo2 = document.getElementById('modalVideo2');
+    const prevButton = document.getElementById('prevVideo');
+    const nextButton = document.getElementById('nextVideo');
+
+    closeModal2.addEventListener('click', () => { 
+      modalVideo2.pause();
+      modal2.style.display = 'none'; 
+    });
+
+    window.addEventListener('click', (event) => { 
+      if (event.target === modal2) {
+        modalVideo2.pause();
+        modal2.style.display = 'none';
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        modalVideo2.pause();
+        modal2.style.display = 'none';
+      }
+      else if (event.key === 'ArrowLeft') prevButton.click();
+      else if (event.key === 'ArrowRight') nextButton.click();
+    });
+
+    prevButton.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + videos.length) % videos.length;
+      modalVideo2.querySelector('source').src = videos[currentIndex];
+      modalVideo2.load();
+      modalVideo2.play();
+    });
+
+    nextButton.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % videos.length;
+      modalVideo2.querySelector('source').src = videos[currentIndex];
+      modalVideo2.load();
+      modalVideo2.play();
+    });
+
+    modalVideo2.addEventListener('error', () => {
+      modalVideo2.src = 'videoo2.mp4'; // hata olursa ilk videoyu yükle
+    });
+
+    return modal2;
+  }
+
+  videoBtn2.addEventListener('click', () => {
+    const modal2 = document.getElementById('videoModal2') || createVideoModal2();
+    modal2.style.display = 'flex';
+  });   // Galeri modal kontrolü
+     // Galeri modal kontrolü
+  const galleryBtn = document.getElementById('galleryBtn');
+  function createGalleryModal() {
+    const images = [
+      { src: 'WhatsApp Image 2025-11-30 at 23.09.05 (2).jpeg', alt: 'Anı 1' },
+      { src: 'WhatsApp Image 2025-11-30 at 23.09.05 (3).jpeg', alt: 'Anı 2' },
+      { src: 'WhatsApp Image 2025-11-30 at 23.09.06.jpeg', alt: 'Anı 3' },
+      { src: 'WhatsApp Image 2025-11-30 at 23.09.06 (1).jpeg', alt: 'Anı 4' },
+      { src: 'WhatsApp Image 2025-11-30 at 23.09.07.jpeg', alt: 'Anı 5' },
+      { src: 'WhatsApp Image 2025-11-30 at 23.09.06 (5).jpeg', alt: 'Anı 6' },
+      { src: 'WhatsApp Image 2025-11-30 at 23.09.06 (4).jpeg', alt: 'Anı 7' },
+      { src: 'whatsapp1.jpeg', alt: 'Anı 8' },
+      { src: 'whatsapp2.jpeg', alt: 'Anı 9' },
+      { src: 'WhatsApp Image 2025-11-30 at 23.09.05.jpeg', alt: 'Anı 10' },
+      { src: 'WhatsApp Image 2025-11-30 at 23.09.07 (3).jpeg', alt: 'Anı 11' },
+      { src: 'WhatsApp Image 2025-11-30 at 23.09.07.jpeg', alt: 'Anı 12' },
+      { src: 'WhatsApp Image 2025-11-30 at 23.53.11.jpeg', alt: 'Anı 14' }
+      
+
+    ];
+    let currentIndex = 0;
+
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.id = 'galleryModal';
+    modal.innerHTML = `
+      <span class="close" id="closeGalleryModal">&times;</span>
+      <div class="gallery-modal">
+        <img class="gallery-image" id="galleryImage" src="${images[currentIndex].src}" alt="${images[currentIndex].alt}">
+        <div class="gallery-nav">
+          <button id="prevImage">Önceki</button>
+          <button id="nextImage">Sonraki</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+
+    const closeModal = document.getElementById('closeGalleryModal');
+    const galleryImage = document.getElementById('galleryImage');
+    const prevButton = document.getElementById('prevImage');
+    const nextButton = document.getElementById('nextImage');
+
+    closeModal.addEventListener('click', () => { modal.style.display = 'none'; });
+    window.addEventListener('click', (event) => { if (event.target === modal) modal.style.display = 'none'; });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') modal.style.display = 'none';
+      else if (event.key === 'ArrowLeft') prevButton.click();
+      else if (event.key === 'ArrowRight') nextButton.click();
+    });
+
+    prevButton.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      galleryImage.src = images[currentIndex].src;
+      galleryImage.alt = images[currentIndex].alt;
+    });
+
+    nextButton.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % images.length;
+      galleryImage.src = images[currentIndex].src;
+      galleryImage.alt = images[currentIndex].alt;
+    });
+
+    galleryImage.addEventListener('error', () => {
+      galleryImage.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCI...';
+    });
+
+    return modal;
+  }
+
+  galleryBtn.addEventListener('click', () => {
+    const modal = document.getElementById('galleryModal') || createGalleryModal();
+    modal.style.display = 'flex';
+  });
+
+
+      // Aşk notu modal kontrolü
+      const noteBtn = document.getElementById('noteBtn');
+      function createNoteModal() {
+        const messages = ["2025 Yılı benim için nekadar soğuk da geçse içimi ısıtacak olan kişi senin olman beni mükemmel yapıyor bu yıl rastladıgım ve tanıdığım en iyi kişisin ve asla ayrılma bırakma gibi bi niyetim yok bırakmıcam gerekirse deccalin gerekirse tacizcin :) senin peşinden son sürat aşkla koşmaya devam edicem sevgilimmm bu yılın bana bıraktığı bi okadar şey varki asla unutamıycagım yıllardan birisi oldu sayende sana çok aşığımmmm umarım yeni yılımız da bu yıl kadar mükemmel ve bir okadar da kavgasız geçer güzelimm YENİ YILIN KUTLU OLSUN BALIMMM 🍯","Gözümü alacak geleceğimi parlatacak kadar güzelsin fıstığımmm\ud83d\udc8e ","Bu yıl seni tanıdığım ve tekrar denk geldiğim için çok mutluyum ve nekadar kavga da etsek kötü zamanlarımız da olsa emin ol onlardan cok iyi ve sevgi dolu zamanlarımız oldu balımm yeni yılımızda kavgaların az olduğu ve bi okadar da sevgi saygının yüksek oldugu bi yıl olmasını dilerimm YENİ YILIN KUTLU OLSUN GÜZELİMMMM 🤍","İlk baharımda sensin son baharımda sen olacaksın Balımm <3  \ud83d\udc93"];
+        const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+        const modal = document.createElement('div');
+        modal.className = 'modal';
+        modal.id = 'noteModal';
+        modal.innerHTML = `
+          <span class="close" id="closeNoteModal">&times;</span>
+          <div class="note-modal">
+            <p class="note-text">${randomMessage}</p>
+          </div>
+        `;
+        document.body.appendChild(modal);
+
+        const closeModal = document.getElementById('closeNoteModal');
+        closeModal.addEventListener('click', () => {
+          modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+          if (event.target === modal) {
+            modal.style.display = 'none';
+          }
+        });
+
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') {
+            modal.style.display = 'none';
+          }
+        });
+
+        return modal;
+      }
+
+      noteBtn.addEventListener('click', () => {
+        const existingModal = document.getElementById('noteModal');
+        if (existingModal) {
+          existingModal.remove();
+        }
+        const modal = createNoteModal();
+        modal.style.display = 'flex';
+      });
+
+
+      // Aşk testi modal kontrolü
+      const quizBtn = document.getElementById('quizBtn');
+      function createQuizModal() {
+        const questions = [
+          {
+            question: "Aşk beyinde hangi hormonları tetikler?",
+            options: ["Dopamin ve Oksitosin", "Adrenalin ve Kortizol", "Serotonin ve Melatonin"],
+            correct: 0,
+            fact: "Aşk, beyinde dopamin ve oksitosin gibi hormonları tetikleyerek mutluluk ve bağlanma hissi yaratır – tıpkı uyuşturucu etkisi gibi!"
+          },
+          {
+            question: "Sarılmak ne yapar?",
+            options: ["Stresi artırır", "Stresi azaltır", "Hiçbir etkisi yok"],
+            correct: 1,
+            fact: "Sarılmak, stres hormonu kortizolü düşürür ve bağışıklık sistemini güçlendirir – mutlu bir kalp sağlıklı bir kalptir!"
+          },
+          {
+            question: "Mutlu ilişkiler neye iyi gelir?",
+            options: ["Sadece duygusal sağlığa", "Kalp sağlığına ve uzun ömre", "Sadece fiziksel sağlığa"],
+            correct: 1,
+            fact: "Mutlu ilişkiler, kalp sağlığını iyileştirir ve ömrü uzatır – aşk gerçekten şifadır!"
+          }
+        ];
+        let currentQuestion = 0;
+        let score = 0;
+
+        const modal = document.createElement('div');
+        modal.className = 'modal';
+        modal.id = 'quizModal';
+        modal.innerHTML = `
+          <span class="close" id="closeQuizModal">&times;</span>
+          <div class="quiz-modal">
+            <p class="quiz-question">${questions[currentQuestion].question}</p>
+            <div class="quiz-options" id="quizOptions"></div>
+            <p class="quiz-result" id="quizResult"></p>
+          </div>
+        `;
+        document.body.appendChild(modal);
+
+        const closeModal = document.getElementById('closeQuizModal');
+        const quizOptions = document.getElementById('quizOptions');
+        const quizResult = document.getElementById('quizResult');
+
+        function showQuestion() {
+          quizOptions.innerHTML = '';
+          questions[currentQuestion].options.forEach((option, index) => {
+            const optionElement = document.createElement('div');
+            optionElement.className = 'quiz-option';
+            optionElement.textContent = option;
+            optionElement.addEventListener('click', () => handleAnswer(index));
+            quizOptions.appendChild(optionElement);
+          });
+          quizResult.style.display = 'none';
+        }
+
+        function handleAnswer(selected) {
+          if (selected === questions[currentQuestion].correct) {
+            score++;
+          }
+          currentQuestion++;
+          if (currentQuestion < questions.length) {
+            showQuestion();
+          } else {
+            showResult();
+          }
+        }
+
+        function showResult() {
+          quizOptions.innerHTML = '';
+          const percentage = Math.floor((score / questions.length) * 100);
+          let message = '';
+          if (percentage === 100) {
+            message = 'Aşk uzmanısın! 💖';
+          } else if (percentage >= 66) {
+            message = 'Aşkı iyi biliyorsun, devam et! 😍';
+          } else {
+            message = 'Aşk hakkında daha çok öğren! 🌹';
+          }
+          quizResult.textContent = `Puanın: %${percentage} - ${message}`;
+          quizResult.style.display = 'block';
+        }
+
+        showQuestion();
+
+        closeModal.addEventListener('click', () => {
+          modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+          if (event.target === modal) {
+            modal.style.display = 'none';
+          }
+        });
+
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') {
+            modal.style.display = 'none';
+          }
+        });
+
+        return modal;
+      }
+
+      quizBtn.addEventListener('click', () => {
+        const modal = document.getElementById('quizModal') || createQuizModal();
+        modal.style.display = 'flex';
+      });
+    </script>
+  </body>
+  </html>
